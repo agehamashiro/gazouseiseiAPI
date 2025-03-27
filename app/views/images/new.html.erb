@@ -1,11 +1,13 @@
 <h1>テキストからアートを生成</h1>
+
 <%= form_with url: images_path, method: :post do %>
   <label>プロンプト:</label>
   <%= text_field_tag :prompt, '', required: true %>
   <%= submit_tag "生成" %>
 <% end %>
 
-<% if @image_url %>
+<% if @image_data.present? %>
   <h2>生成された画像:</h2>
-  <img src="<%= @image_url %>" alt="生成画像">
+  <%= image_tag "data:image/png;base64,#{@image_data}" %>
 <% end %>
+
