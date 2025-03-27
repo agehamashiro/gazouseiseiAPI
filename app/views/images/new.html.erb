@@ -6,8 +6,12 @@
   <%= submit_tag "生成" %>
 <% end %>
 
-<% if @image_data.present? %>
+<% if @image_url %>
   <h2>生成された画像:</h2>
-  <%= image_tag "data:image/png;base64,#{@image_data}" %>
+  <img src="<%= Rails.application.routes.url_helpers.rails_blob_path(@image_url, only_path: true) %>" alt="生成画像">
+<% else %>
+  <% if flash[:error] %>
+    <p style="color: red;"><%= flash[:error] %></p>
+  <% end %>
 <% end %>
 
